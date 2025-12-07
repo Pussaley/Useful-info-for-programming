@@ -1,39 +1,27 @@
-# Useful links
->My list of useful links for my purposes.
+### Docker `docker-compose.yaml`
 
+```yaml
+services:
+  postgres:
+    image: postgres:12.3 // or other image if need to
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=<user>
+      - POSTGRES_PASSWORD=<password>
+      - POSTGRES_DB=<DB>
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata:/var/lib/postgresql/data
 
-## Databases
-### PostgreSQL:
-   - Documentation:
-      - [ru](https://postgrespro.ru/docs/postgresql)
-      - [en](https://www.postgresql.org/docs/)
-   - [Download](https://www.postgresql.org/download/)
-***
-### pgAdmin
-   * [Windows 7](https://www.postgresql.org/ftp/pgadmin/pgadmin4/v4.30/windows/)
-   * [Windows 8
-   * [Windows 10
-   * [Linux  
-***
-## Java
-***
-#### Collections
-[Soft-, Weak-, Phantom-, Strong Reference](https://habr.com/ru/post/169883/)
+volumes:
+  pgdata:
+```
 
-***
+### PostgreSQL `init.sql`:
 
-## GitHub 
-- [Telegram API]()
-- [MarkDown](https://github.com/OlgaVlasova/markdown-doc#readme)
+```sql
+CREATE SCHEMA IF NOT EXISTS news_portal_schema;
 
-
-
-## Utilities
-
->[Загрузочная флешка Windows - программа Rufus (Руфус)][rufus] 
-
->[Виндовс 10 Compact и Full 64 bit 21H1 образ от Флибустьер][win10]
-
-
-[rufus]: https://windowsbit.net/programmy-dlya-windows/38-rufus-zagruzochnaya-fleshka-windows.html
-[win10]: https://windowsbit.net/windows-10-64bit-sborki/352-vindovs-10-compact-i-full-64-bit-21h1-obraz-ot-flibuster.html
+SET search_path TO news_portal_schema;
+```
