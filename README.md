@@ -25,3 +25,8 @@ CREATE SCHEMA IF NOT EXISTS news_portal_schema;
 
 SET search_path TO news_portal_schema;
 ```
+
+### Clear all the docker volumes
+```
+docker volume rm $(docker volume ls -q)
+```
